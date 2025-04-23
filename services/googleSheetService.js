@@ -1,9 +1,11 @@
 const axios = require('axios');
 const csv = require('csv-parser');
 
+
 const fetchSheetData = async (url) => {
   // Validate Google Sheets URL
-  const sheetIdMatch = url.match(/\/d\/(.*?)\//);
+  const regex = /^https:\/\/docs\.google\.com\/spreadsheets\/d\/([a-zA-Z0-9-_]+)(\/.*)?$/;
+  const sheetIdMatch = url.match(regex);
   if (!sheetIdMatch) throw new Error("Invalid Google Sheets URL");
   
   const sheetId = sheetIdMatch[1];
